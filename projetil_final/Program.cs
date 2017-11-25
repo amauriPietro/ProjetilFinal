@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using tabuleiro;
 
 namespace projetil_final
 {
@@ -10,7 +7,10 @@ namespace projetil_final
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("ola bruno");
+            Posicao p;
+            p = new Posicao(3, 4);
+
+            Console.WriteLine("Posicao: " + p);
             Console.ReadLine();
         }
     }
