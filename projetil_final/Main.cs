@@ -10,14 +10,16 @@ namespace projetil_final
         {
             try
             {
-                Tabuleiro tab = new Tabuleiro(8, 8);
-
-                tab.colocarPeca(new torre(tab, Cor.black), new Posicao(0, 0));
-                tab.colocarPeca(new torre(tab, Cor.black), new Posicao(1, 3));
-                tab.colocarPeca(new rei(tab, Cor.black), new Posicao(0, 2));
-                tab.colocarPeca(new torre(tab, Cor.white), new Posicao(7, 7));
-                tab.colocarPeca(new rei(tab, Cor.white), new Posicao(2, 5));
-                Tela.printtab(tab);
+                PartidaDeXadrex partida = new PartidaDeXadrex();
+                while (!partida.terminada) {
+                    Console.Clear();
+                    Tela.printtab(partida.tab);
+                    Console.Write("Origem: ");
+                    Posicao origem = Tela.lerPosicaoXadrex().toPosicao();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrex().toPosicao();
+                    partida.executaMovimento(origem, destino);
+                }
 
             }
             catch(TabuleiroException e)
