@@ -8,7 +8,6 @@ namespace projetil_final
     {
         static void Main(string[] args)
         {
-            /*
             try
             {
                 Tabuleiro tab = new Tabuleiro(8, 8);
@@ -16,6 +15,8 @@ namespace projetil_final
                 tab.colocarPeca(new torre(tab, Cor.black), new Posicao(0, 0));
                 tab.colocarPeca(new torre(tab, Cor.black), new Posicao(1, 3));
                 tab.colocarPeca(new rei(tab, Cor.black), new Posicao(0, 2));
+                tab.colocarPeca(new torre(tab, Cor.white), new Posicao(7, 7));
+                tab.colocarPeca(new rei(tab, Cor.white), new Posicao(2, 5));
                 Tela.printtab(tab);
 
             }
@@ -23,10 +24,6 @@ namespace projetil_final
             {
                 Console.WriteLine(e.Message);
             }
-            */
-            PosicaoXadrex pos = new PosicaoXadrex('c', 7);
-            Console.WriteLine(pos);
-            Console.WriteLine(pos.toPosicao());
             Console.ReadLine(); 
         }
     }
