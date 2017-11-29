@@ -16,7 +16,6 @@ namespace xadrex {
         }
         public void executaMovimento(Posicao origem, Posicao destino) {
             Peca p = tab.retirarPeca(origem);
-            p.incrementarQteMovimentos();
             Peca pecaCapturada = tab.retirarPeca(destino);
             terminada = false;
             tab.colocarPeca(p, destino);

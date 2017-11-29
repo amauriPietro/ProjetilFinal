@@ -16,6 +16,9 @@ namespace projetil_final
                     Tela.printtab(partida.tab);
                     Console.Write("Origem: ");
                     Posicao origem = Tela.lerPosicaoXadrex().toPosicao();
+                    bool[,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
+                    Console.Clear();
+                    Tela.printtab(partida.tab, posicoesPossiveis);
                     Console.Write("Destino: ");
                     Posicao destino = Tela.lerPosicaoXadrex().toPosicao();
                     partida.executaMovimento(origem, destino);
