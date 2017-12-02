@@ -17,6 +17,25 @@
         public void incrementarQteMovimentos() {
             qtemov++;
         }
+        public bool existeMovimentosPossiveis()
+        {
+            bool[,] mat = movimentosPossiveis();
+            for(int i=0; tab.linhas>i; i++)
+            {
+                for(int j=0; tab.colunas>j; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        public bool podeMoverPara(Posicao pos)
+        {
+            return movimentosPossiveis()[pos.linha, pos.coluna];
+        }
         public abstract bool[,] movimentosPossiveis();
     }
 }
