@@ -22,7 +22,6 @@ namespace projetil_final
         public static void printtab(Tabuleiro tab, bool[,] posicoesPossiveis) {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
             ConsoleColor fundoAlterado = ConsoleColor.DarkBlue;
-            ConsoleColor fundoPeca = ConsoleColor.DarkRed;
 
             for (int i = 0; tab.linhas > i; i++) {
                 Console.Write(8 - i + " ");

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using tabuleiro;
 using xadrex;
 
@@ -8,32 +8,42 @@ namespace xadrex {
         public int turno { get; private set; }
         public Cor jogadorAtual { get; private set; }
         public bool terminada { get; private set; }
+        private HashSet<Peca> pecas;
+        private HashSet<Peca> capturadas;
 
         public PartidaDeXadrex() {
             tab = new Tabuleiro(8, 8);
             turno = 1;
             jogadorAtual = Cor.white;
+            terminada = false;
+            pecas = new HashSet<Peca>();
+            capturadas = new HashSet<Peca>();
             colocarPecas();
         }
-        public void executaMovimento(Posicao origem, Posicao destino) {
+        public Peca executaMovimento(Posicao origem, Posicao destino) {
             Peca p = tab.retirarPeca(origem);
+            p.incrementarQteMovimentos();
             Peca pecaCapturada = tab.retirarPeca(destino);
-            terminada = false;
             tab.colocarPeca(p, destino);
+            if (pecaCapturada != null)
+            {
+                capturadas.Add(pecaCapturada);
+            }
+            return pecaCapturada;
         }
         public void realizaJogada(Posicao origem, Posicao destino)
         {
-            executaMovimento(origem, destino);
+            Peca pecaCapturada = executaMovimento(origem, destino);
             turno++;
             mudaJogador();
         }
         public void validarPosicaoDeOrigem(Posicao pos)
         {
-            if(tab.peca(pos) == null)
+            if (tab.peca(pos) == null)
             {
                 throw new TabuleiroException("Não existe peça na posicao na posicao selecionada!");
             }
-            if(jogadorAtual != tab.peca(pos).cor)
+            if (jogadorAtual != tab.peca(pos).cor)
             {
                 throw new TabuleiroException("A peça selecionada não é sua!");
             }
@@ -51,7 +61,7 @@ namespace xadrex {
         }
         private void mudaJogador()
         {
-            if(jogadorAtual == Cor.white)
+            if (jogadorAtual == Cor.white)
             {
                 jogadorAtual = Cor.black;
             }
@@ -60,19 +70,88 @@ namespace xadrex {
                 jogadorAtual = Cor.white;
             }
         }
+        public HashSet<Peca> pecasCapturadas(Cor cor)
+        {
+            HashSet<Peca> aux = new HashSet<Peca>();
+            foreach (Peca x in capturadas)
+            {
+                if(x.cor == cor)
+                {
+                    aux.Add(x);
+                }
+            }
+            return aux;
+        }
+        public HashSet<Peca> pecasEmJogo(Cor cor)
+        {
+            HashSet<Peca> aux = new HashSet<Peca>();
+            foreach (Peca x in pecas)
+            {
+                if (x.cor == cor)
+                {
+                    aux.Add(x);
+                }
+            }
+            aux.ExceptWith(pecasCapturadas(cor));
+            return aux;
+        }
+        private Cor adversaria(Cor cor)
+        {
+            if(cor == Cor.white)
+            {
+                return Cor.black;
+            }
+            else
+            {
+                return Cor.white;
+            }
+        }
+        private Peca rei(Cor cor)
+        {
+            foreach (Peca x in pecasEmJogo(cor))
+            {
+                if(x is rei)
+                {
+                    return x;
+                }
+            }
+            return null;
+        }
+        public bool estaEmXeque(Cor cor)
+        {
+            Peca R = rei(cor);
+            if(R == null)
+            {
+                throw new TabuleiroException("There's no " + cor + "king on the boad!");
+            }
+            foreach(Peca x in pecasEmJogo(adversaria(cor)))
+            {
+                bool[,] mat = x.movimentosPossiveis();
+                if(mat[R.posicao.linha, R.posicao.coluna])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public void colocarNovaPeca(char coluna, int linha, Peca peca)
+        {
+            tab.colocarPeca(peca, new PosicaoXadrex(coluna, linha).toPosicao());
+            pecas.Add(peca);
+        }
         private void colocarPecas() {
-            tab.colocarPeca(new torre(tab, Cor.white), new PosicaoXadrex('c', 1).toPosicao());
-            tab.colocarPeca(new torre(tab, Cor.white), new PosicaoXadrex('c', 2).toPosicao());
-            tab.colocarPeca(new torre(tab, Cor.white), new PosicaoXadrex('d', 2).toPosicao());
-            tab.colocarPeca(new torre(tab, Cor.white), new PosicaoXadrex('e', 2).toPosicao());
-            tab.colocarPeca(new torre(tab, Cor.white), new PosicaoXadrex('e', 1).toPosicao());
-            tab.colocarPeca(new rei(tab, Cor.white), new PosicaoXadrex('d', 1).toPosicao());
-            tab.colocarPeca(new torre(tab, Cor.black), new PosicaoXadrex('c', 7).toPosicao());
-            tab.colocarPeca(new torre(tab, Cor.black), new PosicaoXadrex('c', 8).toPosicao());
-            tab.colocarPeca(new torre(tab, Cor.black), new PosicaoXadrex('d', 7).toPosicao());
-            tab.colocarPeca(new torre(tab, Cor.black), new PosicaoXadrex('e', 8).toPosicao());
-            tab.colocarPeca(new torre(tab, Cor.black), new PosicaoXadrex('e', 7).toPosicao());
-            tab.colocarPeca(new rei(tab, Cor.black), new PosicaoXadrex('d', 8).toPosicao());
+            colocarNovaPeca('c', 1, new torre(tab, Cor.white));
+            colocarNovaPeca('c', 2, new torre(tab, Cor.white));
+            colocarNovaPeca('d', 1, new rei(tab, Cor.white));
+            colocarNovaPeca('d', 2, new torre(tab, Cor.white));
+            colocarNovaPeca('e', 1, new torre(tab, Cor.white));
+            colocarNovaPeca('e', 2, new torre(tab, Cor.white));
+            colocarNovaPeca('c', 7, new torre(tab, Cor.black));
+            colocarNovaPeca('c', 8, new torre(tab, Cor.black));
+            colocarNovaPeca('d', 7, new torre(tab, Cor.black));
+            colocarNovaPeca('d', 8, new rei(tab, Cor.black));
+            colocarNovaPeca('e', 7, new torre(tab, Cor.black));
+            colocarNovaPeca('e', 8, new torre(tab, Cor.black));
 
         }
     }
