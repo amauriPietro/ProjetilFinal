@@ -143,7 +143,7 @@ namespace xadrex {
             Peca R = rei(cor);
             if(R == null)
             {
-                throw new TabuleiroException("There's no " + cor + "king on the boad!");
+                throw new TabuleiroException("There's no " + cor + " king on the boad!");
             }
             foreach(Peca x in pecasEmJogo(adversaria(cor)))
             {
