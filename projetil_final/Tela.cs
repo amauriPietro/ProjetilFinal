@@ -1,11 +1,36 @@
 ﻿using System;
 using tabuleiro;
+using System.Collections.Generic;
 using xadrex;
 
 namespace projetil_final
 {
     class Tela
     {
+        public static void imprimirPartida(PartidaDeXadrex partida) {
+            printtab(partida.tab);
+            Console.WriteLine();
+            imprimirPecasCapturadas(partida);
+            Console.WriteLine("\nTurno: " + partida.turno);
+            Console.WriteLine("Waiting for " + partida.jogadorAtual + " play");
+        }
+        public static void imprimirPecasCapturadas(PartidaDeXadrex partida) {
+            Console.WriteLine("Pecas Capturadas: ");
+            Console.Write("brancas: ");
+            imprimirConjunto(partida.pecasCapturadas(Cor.white));
+            Console.Write("\npretas: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            imprimirConjunto(partida.pecasCapturadas(Cor.black));
+            Console.ForegroundColor = aux;
+        }
+        public static void imprimirConjunto(HashSet<Peca> conjunto) {
+            Console.Write("[");
+            foreach(Peca x in conjunto) {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+        }
         public static void printtab(Tabuleiro tab)
         {
             for(int i = 0; tab.linhas > i; i++)

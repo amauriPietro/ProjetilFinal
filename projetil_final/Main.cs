@@ -15,9 +15,8 @@ namespace projetil_final
                     try
                     {
                         Console.Clear();
-                        Tela.printtab(partida.tab);
-                        Console.WriteLine("\nTurno: " + partida.turno);
-                        Console.WriteLine("Waiting for " + partida.jogadorAtual + " play");
+                        Tela.imprimirPartida(partida);
+                        Console.WriteLine();
                         Console.Write("Origem: ");
                         Posicao origem = Tela.lerPosicaoXadrex().toPosicao();
                         partida.validarPosicaoDeOrigem(origem);
