@@ -12,10 +12,18 @@ namespace projetil_final
             Console.WriteLine();
             imprimirPecasCapturadas(partida);
             Console.WriteLine("\nTurno: " + partida.turno);
-            Console.WriteLine("Waiting for " + partida.jogadorAtual + " play");
-            if (partida.xeque)
+            if (!partida.terminada)
             {
-                Console.WriteLine("XeQuE!");
+                Console.WriteLine("Waiting for " + partida.jogadorAtual + " play");
+                if (partida.xeque)
+                {
+                    Console.WriteLine("XeQuE!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("XEQUE-MATE!");
+                Console.WriteLine("Winner: " + partida.jogadorAtual);
             }
         }
         public static void imprimirPecasCapturadas(PartidaDeXadrex partida) {

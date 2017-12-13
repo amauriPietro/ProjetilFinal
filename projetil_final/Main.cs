@@ -34,7 +34,8 @@ namespace projetil_final
                         Console.ReadLine();
                     }
                 }
-
+                Console.Clear();
+                Tela.imprimirPartida(partida);
             }
             catch(TabuleiroException e)
             {
