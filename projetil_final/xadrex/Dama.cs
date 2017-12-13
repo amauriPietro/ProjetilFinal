@@ -57,7 +57,8 @@ namespace xadrex {
                 if (tab.peca(pos) != null && tab.peca(pos).cor != cor) {
                     break;
                 }
-                pos.definirValores(posicao.linha - 1, posicao.coluna - 1);
+                pos.linha--;
+                pos.coluna--;
             }
             //NE
             pos.definirValores(posicao.linha - 1, posicao.coluna + 1);
@@ -66,7 +67,8 @@ namespace xadrex {
                 if (tab.peca(pos) != null && tab.peca(pos).cor != cor) {
                     break;
                 }
-                pos.definirValores(posicao.linha - 1, posicao.coluna + 1);
+                pos.linha--;
+                pos.coluna++;
             }
             //SE
             pos.definirValores(posicao.linha + 1, posicao.coluna + 1);
@@ -75,7 +77,8 @@ namespace xadrex {
                 if (tab.peca(pos) != null && tab.peca(pos).cor != cor) {
                     break;
                 }
-                pos.definirValores(posicao.linha + 1, posicao.coluna + 1);
+                pos.linha++;
+                pos.coluna++;
             }
             //SO
             pos.definirValores(posicao.linha + 1, posicao.coluna - 1);
@@ -84,7 +87,8 @@ namespace xadrex {
                 if (tab.peca(pos) != null && tab.peca(pos).cor != cor) {
                     break;
                 }
-                pos.definirValores(posicao.linha + 1, posicao.coluna - 1);
+                pos.linha++;
+                pos.coluna--;
             }
             return mat;
         }

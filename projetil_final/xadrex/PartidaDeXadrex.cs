@@ -31,6 +31,22 @@ namespace xadrex {
             {
                 capturadas.Add(pecaCapturada);
             }
+            //#special gameplays liro roque
+            if(p is rei && destino.coluna == origem.coluna + 2) {
+                Posicao origemT = new Posicao(origem.linha, origem.coluna + 3);
+                Posicao destinoT = new Posicao(origem.linha, origem.coluna + 1);
+                Peca T = tab.retirarPeca(origemT);
+                T.incrementarQteMovimentos();
+                tab.colocarPeca(T, destinoT);
+            }
+            //#special gameplays big roque
+            if (p is rei && destino.coluna == origem.coluna - 2) {
+                Posicao origemT = new Posicao(origem.linha, origem.coluna - 4);
+                Posicao destinoT = new Posicao(origem.linha, origem.coluna - 1);
+                Peca T = tab.retirarPeca(origemT);
+                T.incrementarQteMovimentos();
+                tab.colocarPeca(T, destinoT);
+            }
             return pecaCapturada;
         }
         public void realizaJogada(Posicao origem, Posicao destino)
@@ -64,6 +80,22 @@ namespace xadrex {
                 capturadas.Remove(pecaCapturada);
             }
             tab.colocarPeca(p, origem);
+            //#special gameplays liro roque
+            if (p is rei && destino.coluna == origem.coluna + 2) {
+                Posicao origemT = new Posicao(origem.linha, origem.coluna + 3);
+                Posicao destinoT = new Posicao(origem.linha, origem.coluna + 1);
+                Peca T = tab.retirarPeca(destinoT);
+                T.decrementarQteMovimentos();
+                tab.colocarPeca(T, origemT);
+            }
+            //#special gameplays big roque
+            if (p is rei && destino.coluna == origem.coluna - 2) {
+                Posicao origemT = new Posicao(origem.linha, origem.coluna - 4);
+                Posicao destinoT = new Posicao(origem.linha, origem.coluna - 1);
+                Peca T = tab.retirarPeca(destinoT);
+                T.decrementarQteMovimentos();
+                tab.colocarPeca(T, origemT);
+            }
         }
         public void validarPosicaoDeOrigem(Posicao pos)
         {
@@ -204,7 +236,7 @@ namespace xadrex {
             colocarNovaPeca('b', 1, new cavalo(tab, Cor.white));
             colocarNovaPeca('c', 1, new bishop(tab, Cor.white));
             colocarNovaPeca('d', 1, new dama(tab, Cor.white));
-            colocarNovaPeca('e', 1, new rei(tab, Cor.white));
+            colocarNovaPeca('e', 1, new rei(tab, Cor.white, this));
             colocarNovaPeca('f', 1, new bishop(tab, Cor.white));
             colocarNovaPeca('g', 1, new cavalo(tab, Cor.white));
             colocarNovaPeca('h', 1, new torre(tab, Cor.white));
@@ -221,7 +253,7 @@ namespace xadrex {
             colocarNovaPeca('b', 8, new cavalo(tab, Cor.black));
             colocarNovaPeca('c', 8, new bishop(tab, Cor.black));
             colocarNovaPeca('d', 8, new dama(tab, Cor.black));
-            colocarNovaPeca('e', 8, new rei(tab, Cor.black));
+            colocarNovaPeca('e', 8, new rei(tab, Cor.black, this));
             colocarNovaPeca('f', 8, new bishop(tab, Cor.black));
             colocarNovaPeca('g', 8, new cavalo(tab, Cor.black));
             colocarNovaPeca('h', 8, new torre(tab, Cor.black));
