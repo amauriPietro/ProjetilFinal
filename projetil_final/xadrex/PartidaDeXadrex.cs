@@ -199,11 +199,40 @@ namespace xadrex {
             pecas.Add(peca);
         }
         private void colocarPecas() {
-            colocarNovaPeca('c', 1, new torre(tab, Cor.white));
-            colocarNovaPeca('h', 7, new torre(tab, Cor.white));
-            colocarNovaPeca('d', 1, new rei(tab, Cor.white));
-            colocarNovaPeca('a', 8, new rei(tab, Cor.black));
-            colocarNovaPeca('b', 8, new torre(tab, Cor.black));
+            //white
+            colocarNovaPeca('a', 1, new torre(tab, Cor.white));
+            colocarNovaPeca('b', 1, new cavalo(tab, Cor.white));
+            colocarNovaPeca('c', 1, new bishop(tab, Cor.white));
+            colocarNovaPeca('d', 1, new dama(tab, Cor.white));
+            colocarNovaPeca('e', 1, new rei(tab, Cor.white));
+            colocarNovaPeca('f', 1, new bishop(tab, Cor.white));
+            colocarNovaPeca('g', 1, new cavalo(tab, Cor.white));
+            colocarNovaPeca('h', 1, new torre(tab, Cor.white));
+            colocarNovaPeca('a', 2, new pawn(tab, Cor.white));
+            colocarNovaPeca('b', 2, new pawn(tab, Cor.white));
+            colocarNovaPeca('c', 2, new pawn(tab, Cor.white));
+            colocarNovaPeca('d', 2, new pawn(tab, Cor.white));
+            colocarNovaPeca('e', 2, new pawn(tab, Cor.white));
+            colocarNovaPeca('f', 2, new pawn(tab, Cor.white));
+            colocarNovaPeca('g', 2, new pawn(tab, Cor.white));
+            colocarNovaPeca('h', 2, new pawn(tab, Cor.white));
+            //black
+            colocarNovaPeca('a', 8, new torre(tab, Cor.black));
+            colocarNovaPeca('b', 8, new cavalo(tab, Cor.black));
+            colocarNovaPeca('c', 8, new bishop(tab, Cor.black));
+            colocarNovaPeca('d', 8, new dama(tab, Cor.black));
+            colocarNovaPeca('e', 8, new rei(tab, Cor.black));
+            colocarNovaPeca('f', 8, new bishop(tab, Cor.black));
+            colocarNovaPeca('g', 8, new cavalo(tab, Cor.black));
+            colocarNovaPeca('h', 8, new torre(tab, Cor.black));
+            colocarNovaPeca('a', 7, new pawn(tab, Cor.black));
+            colocarNovaPeca('b', 7, new pawn(tab, Cor.black));
+            colocarNovaPeca('c', 7, new pawn(tab, Cor.black));
+            colocarNovaPeca('d', 7, new pawn(tab, Cor.black));
+            colocarNovaPeca('e', 7, new pawn(tab, Cor.black));
+            colocarNovaPeca('f', 7, new pawn(tab, Cor.black));
+            colocarNovaPeca('g', 7, new pawn(tab, Cor.black));
+            colocarNovaPeca('h', 7, new pawn(tab, Cor.black));
 
         }
     }
